@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class NewBehaviourScript : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public static string Test()
     {
-        
+        return "Hello World";
     }
 
-    // Update is called once per frame
-    void Update()
+    public string RuntimeTest()
     {
-        
+        return "Hello Runtime World";
     }
 }
