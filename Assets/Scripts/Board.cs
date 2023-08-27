@@ -73,6 +73,17 @@ public class Board
         return board[x, y];
     }
 
+    public bool WillSymbolWinIfMoveHere(Symbol symbol, int x, int y)
+    {
+        if (Get(x, y) != Symbol.None)
+            throw new System.ArgumentException("Position already taken");
+
+        board[x, y] = symbol;
+        var result = WhoWins() == symbol;
+        board[x, y] = Symbol.None;
+        return result;
+    }
+
     public Symbol? WhoWins()
     {
         // horizontal check
