@@ -73,7 +73,7 @@ public class Board
         return board[x, y];
     }
 
-    public Symbol WhoWins()
+    public Symbol? WhoWins()
     {
         // horizontal check
         for (int i = 0; i < Size; i++)
@@ -115,7 +115,10 @@ public class Board
             }
         }
 
-        return Symbol.None;
+        if (IsFull())
+            return Symbol.None;
+
+        return null;
     }
 
     public bool IsFull()

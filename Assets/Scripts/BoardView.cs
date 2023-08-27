@@ -18,8 +18,8 @@ public class BoardView : MonoBehaviour
 
     private void Start()
     {
-        SyncBoard();
         board.OnSymbolChange += OnSymbolChange;
+        SyncBoard();
     }
 
     public void SyncBoard()

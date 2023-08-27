@@ -27,7 +27,7 @@ public class Match
     private int currentPlayerIndex = 0;
     public Player CurrentPlayer => Players[currentPlayerIndex];
 
-    public Board.Symbol Winner { get; private set; }
+    public Board.Symbol? Winner { get; private set; }
 
     public void OnCellClick(Vector2Int pos)
     {
@@ -42,7 +42,7 @@ public class Match
 
     public void MakeMove(Player player, Vector2Int pos)
     {
-        if (Winner != Board.Symbol.None)
+        if (Winner != null)
             throw new System.ArgumentException("Game already finished");
 
         if (player != CurrentPlayer)
@@ -51,9 +51,13 @@ public class Match
         Board.Set(player.Symbol, pos.x, pos.y);
 
         Winner = Board.WhoWins();
-        if (Winner == Board.Symbol.None)
+        if (Winner == null)
         {
             NextPlayer();
+        }
+        else if (Winner == Board.Symbol.None)
+        {
+            Debug.Log("Draw!");
         }
         else
         {
