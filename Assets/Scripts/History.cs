@@ -44,6 +44,12 @@ public class History : MonoBehaviour
             return;
         }
 
+        if (!(match.CurrentPlayer is LocalPlayer))
+        {
+            Debug.Log("Can't undo. Not your turn");
+            return;
+        }
+
         if (moves.Count < 2)
         {
             Debug.Log("Can't undo. Not enough moves to undo");
