@@ -69,11 +69,29 @@ public class Board
                 return board[0, j];
         }
 
-        if (board[0, 0] != Symbol.None && board[0, 0] == board[1, 1] && board[1, 1] == board[2, 2])
-            return board[0, 0];
+        if (board[0, 0] != Symbol.None)
+        {
+            for (int i = 1; i < Size; i++)
+            {
+                if (board[i, i] != board[0, 0])
+                    break;
 
-        if (board[0, 2] != Symbol.None && board[0, 2] == board[1, 1] && board[1, 1] == board[2, 0])
-            return board[0, 2];
+                if (i == Size - 1)
+                    return board[0, 0];
+            }
+        }
+
+        if (board[0, Size-1] != Symbol.None)
+        {
+            for (int i = 1; i < Size; i++)
+            {
+                if (board[i, Size - 1 - i] != board[0, Size-1])
+                    break;
+
+                if (i == Size - 1)
+                    return board[0, Size-1];
+            }
+        }
 
         return Symbol.None;
     }
