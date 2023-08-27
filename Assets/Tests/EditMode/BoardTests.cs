@@ -111,6 +111,18 @@ namespace Tests
         }
 
         [Test]
+        public void WinOtherDiagonal()
+        {
+            var board = new Board();
+            Assert.AreEqual(Board.Symbol.None, board.WhoWins());
+            board.Set(Board.Symbol.O, 0, 2);
+            board.Set(Board.Symbol.O, 1, 1);
+            Assert.AreEqual(Board.Symbol.None, board.WhoWins());
+            board.Set(Board.Symbol.O, 2, 0);
+            Assert.AreEqual(Board.Symbol.O, board.WhoWins());
+        }
+
+        [Test]
         public void WinNone()
         {
             var board = new Board();
