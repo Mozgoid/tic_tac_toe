@@ -59,7 +59,7 @@ public class Board
         SetWithoutCheck(symbol, x, y);
     }
 
-    private void SetWithoutCheck(Symbol symbol, int x, int y)
+    public void SetWithoutCheck(Symbol symbol, int x, int y)
     {
         board[x, y] = symbol;
         OnSymbolChange?.Invoke(symbol, new Vector2Int(x, y));

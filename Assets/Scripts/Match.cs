@@ -21,13 +21,18 @@ public class Match
             new LocalPlayer(Board.Symbol.X),
             new LocalPlayer(Board.Symbol.O),
         };
+        NextPlayer();
     }
 
     public Player[] Players { get; private set; }
-    private int currentPlayerIndex = 0;
-    public Player CurrentPlayer => Players[currentPlayerIndex];
+    private int currentPlayerIndex = -1;
+    public Player CurrentPlayer {get; private set;}
 
+    // null if not decided yet, None if draw, otherwise the winner
     public Board.Symbol? Winner { get; private set; }
+    public bool IsGameOver => Winner != null;
+
+    public Action<Player> OnPlayerSwitch;
 
     public void OnCellClick(Vector2Int pos)
     {
@@ -42,7 +47,7 @@ public class Match
 
     public void MakeMove(Player player, Vector2Int pos)
     {
-        if (Winner != null)
+        if (IsGameOver)
             throw new System.ArgumentException("Game already finished");
 
         if (player != CurrentPlayer)
@@ -61,12 +66,14 @@ public class Match
         }
         else
         {
-            Debug.Log($"Player {player.Name} wins!");
+            Debug.Log($"{player.Name} wins!");
         }
     }
 
     private void NextPlayer()
     {
         currentPlayerIndex = (currentPlayerIndex + 1) % Players.Length;
+        CurrentPlayer = Players[currentPlayerIndex];
+        OnPlayerSwitch?.Invoke(CurrentPlayer);
     }
 }
