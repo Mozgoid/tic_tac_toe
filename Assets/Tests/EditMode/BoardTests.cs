@@ -90,10 +90,10 @@ namespace Tests
         public void WinVertical()
         {
             var board = new Board();
-            Assert.AreEqual(Board.Symbol.None, board.WhoWins());
+            Assert.AreEqual(null, board.WhoWins());
             board.Set(Board.Symbol.X, 0, 0);
             board.Set(Board.Symbol.X, 0, 1);
-            Assert.AreEqual(Board.Symbol.None, board.WhoWins());
+            Assert.AreEqual(null, board.WhoWins());
             board.Set(Board.Symbol.X, 0, 2);
             Assert.AreEqual(Board.Symbol.X, board.WhoWins());
         }
@@ -102,10 +102,10 @@ namespace Tests
         public void WinDiagonal()
         {
             var board = new Board();
-            Assert.AreEqual(Board.Symbol.None, board.WhoWins());
+            Assert.AreEqual(null, board.WhoWins());
             board.Set(Board.Symbol.O, 0, 0);
             board.Set(Board.Symbol.O, 1, 1);
-            Assert.AreEqual(Board.Symbol.None, board.WhoWins());
+            Assert.AreEqual(null, board.WhoWins());
             board.Set(Board.Symbol.O, 2, 2);
             Assert.AreEqual(Board.Symbol.O, board.WhoWins());
         }
@@ -114,34 +114,52 @@ namespace Tests
         public void WinOtherDiagonal()
         {
             var board = new Board();
-            Assert.AreEqual(Board.Symbol.None, board.WhoWins());
+            Assert.AreEqual(null, board.WhoWins());
             board.Set(Board.Symbol.O, 0, 2);
             board.Set(Board.Symbol.O, 1, 1);
-            Assert.AreEqual(Board.Symbol.None, board.WhoWins());
+            Assert.AreEqual(null, board.WhoWins());
             board.Set(Board.Symbol.O, 2, 0);
             Assert.AreEqual(Board.Symbol.O, board.WhoWins());
         }
 
         [Test]
-        public void WinNone()
+        public void WinNonYet()
         {
             var board = new Board();
-            Assert.AreEqual(Board.Symbol.None, board.WhoWins());
+            Assert.AreEqual(null, board.WhoWins());
             board.Set(Board.Symbol.X, 0, 0);
             board.Set(Board.Symbol.O, 1, 1);
-            Assert.AreEqual(Board.Symbol.None, board.WhoWins());
+            Assert.AreEqual(null, board.WhoWins());
             board.Set(Board.Symbol.X, 2, 2);
+            Assert.AreEqual(null, board.WhoWins());
+        }
+
+        [Test]
+        public void Draw()
+        {
+            var board = new Board();
+            board.Set(Board.Symbol.X, 0, 0);
+            board.Set(Board.Symbol.O, 0, 1);
+            board.Set(Board.Symbol.X, 0, 2);
+            board.Set(Board.Symbol.X, 1, 0);
+            board.Set(Board.Symbol.O, 1, 1);
+            board.Set(Board.Symbol.X, 1, 2);
+            board.Set(Board.Symbol.O, 2, 0);
+            board.Set(Board.Symbol.X, 2, 1);
+            board.Set(Board.Symbol.O, 2, 2);
+            Assert.IsTrue(board.IsFull());
             Assert.AreEqual(Board.Symbol.None, board.WhoWins());
         }
+
 
         [Test]
         public void WinHorizontal()
         {
             var board = new Board();
-            Assert.AreEqual(Board.Symbol.None, board.WhoWins());
+            Assert.AreEqual(null, board.WhoWins());
             board.Set(Board.Symbol.X, 0, 1);
             board.Set(Board.Symbol.X, 1, 1);
-            Assert.AreEqual(Board.Symbol.None, board.WhoWins());
+            Assert.AreEqual(null, board.WhoWins());
             board.Set(Board.Symbol.X, 2, 1);
             Assert.AreEqual(Board.Symbol.X, board.WhoWins());
         }
