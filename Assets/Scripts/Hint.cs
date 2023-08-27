@@ -1,26 +1,31 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public static class Hint
 {
+    private static List<Vector2Int> emptyPositionsCache;
     public static Vector2Int RandomHint(Board board)
     {
         if (board.IsFull())
             throw new System.ArgumentException("Board is full");
 
-        var emptyPositions = new List<Vector2Int>();
+        if (emptyPositionsCache == null)
+        {
+            emptyPositionsCache = new List<Vector2Int>(board.Size * board.Size);
+        }
+        emptyPositionsCache.Clear();
+
         for (int x = 0; x < board.Size; ++x)
         {
             for (int y = 0; y < board.Size; ++y)
             {
                 if (board.Get(x, y) == Board.Symbol.None)
                 {
-                    emptyPositions.Add(new Vector2Int(x, y));
+                    emptyPositionsCache.Add(new Vector2Int(x, y));
                 }
             }
         }
-        return emptyPositions[Random.Range(0, emptyPositions.Count)];
+        return emptyPositionsCache[Random.Range(0, emptyPositionsCache.Count)];
     }
 
     // Try center and corners first, then random
@@ -91,4 +96,7 @@ public static class Hint
 
         return MediumHint(board);
     }
+
+    //TODO: even better hint is possible. When smart hint can't detect wins or blocks,
+    // It could try search position that can lead to win in 2 moves, if not blocked by opponent.
 }
