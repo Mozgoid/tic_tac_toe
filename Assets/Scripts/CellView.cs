@@ -7,6 +7,9 @@ public class CellView : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer x;
     [SerializeField] private SpriteRenderer o;
+    [SerializeField] private SpriteRenderer back;
+
+    public Vector2 Size => back.sprite.bounds.extents * 2;
 
     public Action<Vector2Int> OnClick;
 
@@ -22,6 +25,23 @@ public class CellView : MonoBehaviour
     {
         Debug.Log($"Sprite Clicked {Position}");
         OnClick?.Invoke(Position);
+        TestSwap();
+    }
+
+    private void TestSwap()
+    {
+        if (x.gameObject.activeSelf)
+        {
+            SetSymbol(Board.Symbol.O);
+        }
+        else if (o.gameObject.activeSelf)
+        {
+            SetSymbol(Board.Symbol.None);
+        }
+        else
+        {
+            SetSymbol(Board.Symbol.X);
+        }
     }
 
 }

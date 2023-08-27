@@ -13,30 +13,32 @@ public class Board
 
     private readonly Symbol[,] board = new Symbol[3, 3];
 
+    public int Size => board.GetLength(0);
+
     public void Reset()
     {
-        for (int i = 0; i < board.GetLength(0); i++)
+        for (int i = 0; i < Size; i++)
         {
-            for (int j = 0; j < board.GetLength(1); j++) 
+            for (int j = 0; j < Size; j++) 
                 board[i, j] = Symbol.None;
         }
     }
 
     public void SetBoard(Symbol[,] newBoard)
     {
-        if (newBoard.GetLength(0) != 3 || newBoard.GetLength(1) != 3)
-            throw new System.ArgumentException("Board must be 3x3");
+        if (newBoard.GetLength(0) != Size || newBoard.GetLength(1) != Size)
+            throw new System.ArgumentException($"Board must be {Size}x{Size}");
 
-        for (int i = 0; i < newBoard.GetLength(0); i++)
+        for (int i = 0; i < Size; i++)
         {
-            for (int j = 0; j < newBoard.GetLength(1); j++) 
+            for (int j = 0; j < Size; j++) 
                 this.board[i, j] = newBoard[i, j];
         }
     }
 
     public void Set(Symbol symbol, int x, int y)
     {
-        if (x < 0 || x >= board.GetLength(0) || y < 0 || y >= board.GetLength(1))
+        if (x < 0 || x >= Size || y < 0 || y >= Size)
             throw new System.ArgumentException("Invalid coordinates");
 
         if (board[x, y] != Symbol.None)
@@ -47,7 +49,7 @@ public class Board
 
     public Symbol Get(int x, int y)
     {
-        if (x < 0 || x >= board.GetLength(0) || y < 0 || y >= board.GetLength(1))
+        if (x < 0 || x >= Size || y < 0 || y >= Size)
             throw new System.ArgumentException("Invalid coordinates");
 
         return board[x, y];
@@ -55,13 +57,13 @@ public class Board
 
     public Symbol WhoWins()
     {
-        for (int i = 0; i < board.GetLength(0); i++)
+        for (int i = 0; i < Size; i++)
         {
             if (board[i, 0] != Symbol.None && board[i, 0] == board[i, 1] && board[i, 1] == board[i, 2])
                 return board[i, 0];
         }
 
-        for (int j = 0; j < board.GetLength(1); j++)
+        for (int j = 0; j < Size; j++)
         {
             if (board[0, j] != Symbol.None && board[0, j] == board[1, j] && board[1, j] == board[2, j])
                 return board[0, j];
