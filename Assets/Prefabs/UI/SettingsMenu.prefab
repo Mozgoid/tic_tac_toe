@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6090030034873085736}
   - component: {fileID: 6090030034873085737}
   m_Layer: 5
-  m_Name: Settings
+  m_Name: SettingsMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
