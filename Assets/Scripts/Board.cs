@@ -11,7 +11,7 @@ public class Board
         O,
     }
 
-    public Symbol[,] board = new Symbol[3, 3];
+    private readonly Symbol[,] board = new Symbol[3, 3];
 
     public void Reset()
     {
@@ -20,6 +20,37 @@ public class Board
             for (int j = 0; j < board.GetLength(1); j++) 
                 board[i, j] = Symbol.None;
         }
+    }
+
+    public void SetBoard(Symbol[,] newBoard)
+    {
+        if (newBoard.GetLength(0) != 3 || newBoard.GetLength(1) != 3)
+            throw new System.ArgumentException("Board must be 3x3");
+
+        for (int i = 0; i < newBoard.GetLength(0); i++)
+        {
+            for (int j = 0; j < newBoard.GetLength(1); j++) 
+                this.board[i, j] = newBoard[i, j];
+        }
+    }
+
+    public void Set(Symbol symbol, int x, int y)
+    {
+        if (x < 0 || x >= board.GetLength(0) || y < 0 || y >= board.GetLength(1))
+            throw new System.ArgumentException("Invalid coordinates");
+
+        if (board[x, y] != Symbol.None)
+            throw new System.ArgumentException("Position already taken");
+
+        board[x, y] = symbol;
+    }
+
+    public Symbol Get(int x, int y)
+    {
+        if (x < 0 || x >= board.GetLength(0) || y < 0 || y >= board.GetLength(1))
+            throw new System.ArgumentException("Invalid coordinates");
+
+        return board[x, y];
     }
 
     public Symbol WhoWins()
@@ -43,5 +74,16 @@ public class Board
             return board[0, 2];
 
         return Symbol.None;
+    }
+
+    public bool IsFull()
+    {
+        foreach (Symbol symbol in board)
+        {
+            if (symbol == Symbol.None)
+                return false;
+        }
+
+        return true;
     }
 }
