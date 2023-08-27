@@ -23,8 +23,41 @@ public class LocalPlayer : Player
 
 public class AIPlayer : Player
 {
-    public AIPlayer(Board.Symbol symbol) : base(symbol)
+    public enum Difficulty
     {
+        Easy,
+        Medium,
+        Hard,
+    }
+
+    public Difficulty difficulty = Difficulty.Easy;
+    private Match match;
+    public AIPlayer(Board.Symbol symbol, Match match, Difficulty difficulty) : base(symbol)
+    {
+        this.match = match;
+        this.difficulty = difficulty;
+        match.OnPlayerSwitch += OnPlayerSwitch;
+    }
+
+    public void OnPlayerSwitch(Player player)
+    {
+        if (player == this)
+        {
+            switch (difficulty)
+            {
+                case Difficulty.Easy:
+                    match.MakeMove(this, Hint.RandomHint(match.Board));
+                    break;
+                case Difficulty.Medium:
+                    match.MakeMove(this, Hint.MediumHint(match.Board));
+                    break;
+                case Difficulty.Hard:
+                    match.MakeMove(this, Hint.SmartHint(match.Board, Symbol));
+                    break;
+                default:
+                    throw new System.NotImplementedException();
+            }
+        }
     }
 }
 

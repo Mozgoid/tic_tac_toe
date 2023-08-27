@@ -19,7 +19,7 @@ public class Match
         Players = new Player[]
         {
             new LocalPlayer(Board.Symbol.X),
-            new LocalPlayer(Board.Symbol.O),
+            new AIPlayer(Board.Symbol.O, this, AIPlayer.Difficulty.Medium),
         };
         NextPlayer();
     }
