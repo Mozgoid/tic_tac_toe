@@ -1,24 +1,28 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class BoardView : MonoBehaviour
 {
     [SerializeField] private CellView cellPrefab;
 
     private Board board;
+    private Match match;
 
     private CellView[,] cells;
 
-    private void Start()
-    {
-        SetBoard(new Board());
-    }
-
-    public void SetBoard(Board board)
+    [Zenject.Inject]
+    public void Inject(Board board, Match match)
     {
         this.board = board;
+        this.match = match;
+    }
 
+    private void Start()
+    {
+        SyncBoard();
+    }
+
+    public void SyncBoard()
+    {
         if (cells != null)
         {
             foreach (var cell in cells)
@@ -40,7 +44,7 @@ public class BoardView : MonoBehaviour
                 var cell = Instantiate(cellPrefab, transform);
                 cell.transform.localPosition = cellBottomLeftStart + new Vector3(cellSize.x * i, cellSize.y * j, 0);
                 cell.Position = new Vector2Int(i, j);
-                // cell.OnClick += OnCellClicked;
+                cell.OnClick += match.OnCellClick;
                 cells[i, j] = cell;
             }
         }
