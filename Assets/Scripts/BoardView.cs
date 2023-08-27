@@ -19,6 +19,7 @@ public class BoardView : MonoBehaviour
     private void Start()
     {
         SyncBoard();
+        board.OnSymbolChange += OnSymbolChange;
     }
 
     public void SyncBoard()
@@ -48,5 +49,10 @@ public class BoardView : MonoBehaviour
                 cells[i, j] = cell;
             }
         }
+    }
+
+    private void OnSymbolChange(Board.Symbol symbol, Vector2Int pos)
+    {
+        cells[pos.x, pos.y].SetSymbol(symbol);
     }
 }

@@ -1,7 +1,14 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+/// <summary>
+/// This class holds information about which symbol is present on board.
+/// It also can check win condition.
+/// First dimension is X (from left to right), second is Y (from bottom to top).
+/// </summary>
 public class Board
 {
     public enum Symbol
@@ -12,15 +19,18 @@ public class Board
     }
 
     private readonly Symbol[,] board = new Symbol[3, 3];
+    public Action<Symbol, Vector2Int> OnSymbolChange;
 
     public int Size => board.GetLength(0);
 
     public void Reset()
     {
-        for (int i = 0; i < Size; i++)
+        for (int x = 0; x < Size; x++)
         {
-            for (int j = 0; j < Size; j++) 
-                board[i, j] = Symbol.None;
+            for (int y = 0; y < Size; y++)
+            {
+                SetWithoutCheck(Symbol.None, x, y);
+            }
         }
     }
 
@@ -29,10 +39,12 @@ public class Board
         if (newBoard.GetLength(0) != Size || newBoard.GetLength(1) != Size)
             throw new System.ArgumentException($"Board must be {Size}x{Size}");
 
-        for (int i = 0; i < Size; i++)
+        for (int x = 0; x < Size; x++)
         {
-            for (int j = 0; j < Size; j++) 
-                this.board[i, j] = newBoard[i, j];
+            for (int y = 0; y < Size; y++)
+            {
+                SetWithoutCheck(newBoard[x, y], x, y);
+            }
         }
     }
 
@@ -44,7 +56,13 @@ public class Board
         if (board[x, y] != Symbol.None)
             throw new System.ArgumentException("Position already taken");
 
+        SetWithoutCheck(symbol, x, y);
+    }
+
+    private void SetWithoutCheck(Symbol symbol, int x, int y)
+    {
         board[x, y] = symbol;
+        OnSymbolChange?.Invoke(symbol, new Vector2Int(x, y));
     }
 
     public Symbol Get(int x, int y)
