@@ -69,4 +69,37 @@ public class Customization : MonoBehaviour
 
         Debug.Log($"Swapped to bundle {newBundleName}");
     }
+
+    public static void SwapSpriteAndKeepSize(SpriteRenderer spriteRenderer, Sprite newSprite)
+    {
+        if (newSprite == null)
+        {
+            Debug.Log("new sprite is null");
+            return;
+        }
+        if (spriteRenderer == null)
+        {
+            Debug.Log("sprite renderer is null");
+            return;
+        }
+        if (spriteRenderer.sprite == null)
+        {
+            Debug.Log("old sprite is null");
+            spriteRenderer.sprite = newSprite;
+            return;
+        }
+        
+        var oldSprite = spriteRenderer.sprite;
+        // Debug.Log($"old {oldSprite.name} size: {oldSprite.rect.size} {oldSprite.pixelsPerUnit} {oldSprite.rect.width} {oldSprite.rect.height}");
+        // Debug.Log($"new {newSprite.name} size: {newSprite.rect.size} {newSprite.pixelsPerUnit} {newSprite.rect.width} {newSprite.rect.height}");
+
+        var oldSize = spriteRenderer.sprite.rect.size;
+        var newSize = newSprite.rect.size;
+
+        var scale = new Vector2(oldSize.x / newSize.x, oldSize.y / newSize.y);
+        spriteRenderer.sprite = newSprite;
+
+        var oldLocalScale = spriteRenderer.transform.localScale;
+        spriteRenderer.transform.localScale = new Vector3(oldLocalScale.x * scale.x, oldLocalScale.y * scale.y, oldLocalScale.z);
+    }
 }

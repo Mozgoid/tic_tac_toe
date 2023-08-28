@@ -6,20 +6,31 @@ public class BoardView : MonoBehaviour
 
     private Board board;
     private Match match;
+    private Customization customization;
 
     private CellView[,] cells;
 
     [Zenject.Inject]
-    public void Inject(Board board, Match match)
+    public void Inject(Board board, Match match, Customization customization)
     {
         this.board = board;
         this.match = match;
+        this.customization = customization;
     }
 
     private void Start()
     {
         board.OnSymbolChange += OnSymbolChange;
+        customization.OnCustomizationChanged += OnCustomizationChanged;
         SyncBoard();
+    }
+
+    private void OnCustomizationChanged(Customization customization)
+    {
+        foreach (var cell in cells)
+        {
+            cell.OnCustomizationChanged(customization);
+        }
     }
 
     public void SyncBoard()
@@ -49,6 +60,8 @@ public class BoardView : MonoBehaviour
                 cells[i, j] = cell;
             }
         }
+
+        OnCustomizationChanged(customization);
     }
 
     private void OnSymbolChange(Board.Symbol symbol, Vector2Int pos)

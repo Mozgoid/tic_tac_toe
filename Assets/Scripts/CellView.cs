@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CellView : MonoBehaviour
@@ -14,6 +12,12 @@ public class CellView : MonoBehaviour
     public Action<Vector2Int> OnClick;
 
     public Vector2Int Position { get; set; }
+
+    public void OnCustomizationChanged(Customization customization)
+    {
+        Customization.SwapSpriteAndKeepSize(x, customization.X);
+        Customization.SwapSpriteAndKeepSize(o, customization.O);
+    }
 
     public void SetSymbol(Board.Symbol symbol)
     {
