@@ -14,6 +14,11 @@ public class BackgroundCustomization : MonoBehaviour
         OnCustomizationChanged(customization);
     }
 
+    private void OnDestroy()
+    {
+        customization.OnCustomizationChanged -= OnCustomizationChanged;
+    }
+
     private void OnCustomizationChanged(Customization customization)
     {
         backgroud.sprite = customization.Background;

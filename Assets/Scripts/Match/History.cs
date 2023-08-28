@@ -27,6 +27,11 @@ public class History : MonoBehaviour
         board.OnSymbolChange += OnSymbolChange;
     }
 
+    private void OnDestroy()
+    {
+        board.OnSymbolChange -= OnSymbolChange;
+    }
+
     private void OnSymbolChange(Board.Symbol symbol, Vector2Int pos)
     {
         if (symbol == Board.Symbol.None)

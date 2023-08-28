@@ -26,6 +26,12 @@ public class BoardView : MonoBehaviour
         match.StartMatch();
     }
 
+    private void OnDestroy()
+    {
+        board.OnSymbolChange -= OnSymbolChange;
+        customization.OnCustomizationChanged -= OnCustomizationChanged;
+    }
+
     private void OnCustomizationChanged(Customization customization)
     {
         foreach (var cell in cells)

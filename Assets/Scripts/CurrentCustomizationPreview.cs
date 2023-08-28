@@ -16,6 +16,11 @@ public class CurrentCustomizationPreview : MonoBehaviour
         OnCustomizationChanged(customization);
     }
 
+    private void OnDestroy()
+    {
+        customization.OnCustomizationChanged -= OnCustomizationChanged;
+    }
+
     private void OnCustomizationChanged(Customization customization)
     {
         X.sprite = customization.X;

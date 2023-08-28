@@ -14,6 +14,12 @@ public class MatchAudio : MonoBehaviour
         match.OnMoveMade += OnMoveMade;
     }
 
+    private void OnDestroy()
+    {
+        match.OnGameOver -= OnGameOver;
+        match.OnMoveMade -= OnMoveMade;
+    }
+
     private void OnGameOver(Board.Symbol winner)
     {
         var hasLocalPlayers = false;
