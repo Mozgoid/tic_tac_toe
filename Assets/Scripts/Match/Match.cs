@@ -75,6 +75,7 @@ public class Match
     public Board.Symbol? Winner { get; private set; }
     public bool IsGameOver => Winner != null;
     public Action<Board.Symbol> OnGameOver;
+    public Action<Board.Symbol, Vector2Int> OnMoveMade;
 
     public Action<Player> OnPlayerSwitch;
 
@@ -101,6 +102,8 @@ public class Match
             throw new System.ArgumentException("Not your turn");
 
         Board.Set(player.Symbol, pos.x, pos.y);
+        OnMoveMade?.Invoke(player.Symbol, pos);
+
         Debug.Log($"{player.Name} set {player.Symbol} at {pos}");
 
         var winner = Board.WhoWins();
