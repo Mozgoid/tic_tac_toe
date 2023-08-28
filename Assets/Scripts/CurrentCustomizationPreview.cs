@@ -14,7 +14,6 @@ public class CurrentCustomizationPreview : MonoBehaviour
     {
         customization.OnCustomizationChanged += OnCustomizationChanged;
         OnCustomizationChanged(customization);
-        customization.SwapAssets("moon bundle");
     }
 
     private void OnCustomizationChanged(Customization customization)
