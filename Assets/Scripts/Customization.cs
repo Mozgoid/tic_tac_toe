@@ -89,7 +89,7 @@ public class Customization : MonoBehaviour
             return;
         }
         
-        var oldSprite = spriteRenderer.sprite;
+        // var oldSprite = spriteRenderer.sprite;
         // Debug.Log($"old {oldSprite.name} size: {oldSprite.rect.size} {oldSprite.pixelsPerUnit} {oldSprite.rect.width} {oldSprite.rect.height}");
         // Debug.Log($"new {newSprite.name} size: {newSprite.rect.size} {newSprite.pixelsPerUnit} {newSprite.rect.width} {newSprite.rect.height}");
 
