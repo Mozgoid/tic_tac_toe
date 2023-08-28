@@ -18,6 +18,16 @@ public class Board
         O,
     }
 
+    public enum WinType
+    {
+        None,
+        Draw,
+        Horizontal,
+        Vertical,
+        DiagonalBottomLeftToTopRight,
+        OtherDiagonal,
+    }
+
     private readonly Symbol[,] board = new Symbol[3, 3];
     public Action<Symbol, Vector2Int> OnSymbolChange;
 
@@ -86,18 +96,30 @@ public class Board
 
     public Symbol? WhoWins()
     {
+        var (dimension, symbol, wintype) = GetWinInfo();
+        if (wintype == WinType.None)
+            return null;
+        return symbol;
+    }
+
+    public (int dimension, Symbol symbol, WinType wintype) GetWinInfo()
+    {
         // horizontal check
-        for (int i = 0; i < Size; i++)
+        for (int x = 0; x < Size; x++)
         {
-            if (board[i, 0] != Symbol.None && board[i, 0] == board[i, 1] && board[i, 1] == board[i, 2])
-                return board[i, 0];
+            if (board[x, 0] != Symbol.None && board[x, 0] == board[x, 1] && board[x, 1] == board[x, 2])
+            {
+                return (x , board[x, 0], WinType.Horizontal);
+            }
         }
 
         // vertical check
-        for (int j = 0; j < Size; j++)
+        for (int y = 0; y < Size; y++)
         {
-            if (board[0, j] != Symbol.None && board[0, j] == board[1, j] && board[1, j] == board[2, j])
-                return board[0, j];
+            if (board[0, y] != Symbol.None && board[0, y] == board[1, y] && board[1, y] == board[2, y])
+            {
+                return (y , board[0, y], WinType.Vertical);
+            }
         }
 
         // diagonal check
@@ -109,7 +131,9 @@ public class Board
                     break;
 
                 if (i == Size - 1)
-                    return board[0, 0];
+                {
+                    return (0 , board[0, 0], WinType.DiagonalBottomLeftToTopRight);
+                }
             }
         }
 
@@ -122,14 +146,16 @@ public class Board
                     break;
 
                 if (i == Size - 1)
-                    return board[0, Size-1];
+                {
+                    return (0 , board[0, Size-1], WinType.OtherDiagonal);
+                }
             }
         }
 
         if (IsFull())
-            return Symbol.None;
+            return (0, Symbol.None, WinType.Draw);
 
-        return null;
+        return (0, Symbol.None, WinType.None);
     }
 
     public bool IsFull()
