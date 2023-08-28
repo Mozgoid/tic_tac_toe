@@ -11,7 +11,7 @@ public class SettingsView : MonoBehaviour
 
     [Zenject.Inject] private AudioManager audioManager;
 
-    private void Awake()
+    private void Start()
     {
         sound.onValueChanged.AddListener(audioManager.Sound.Set);
         music.onValueChanged.AddListener(audioManager.Music.Set);

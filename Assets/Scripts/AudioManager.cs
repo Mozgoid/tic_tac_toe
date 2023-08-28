@@ -16,7 +16,7 @@ public class AudioManager : MonoBehaviour
 
         public void Load()
         {
-            var savedValue = PlayerPrefs.GetFloat(SaveName, maxVolume);
+            var savedValue = PlayerPrefs.GetFloat(SaveName, 0.8f);
             var volume = Mathf.Lerp(minVolume, maxVolume, savedValue);
             mixer.audioMixer.SetFloat($"{mixer.name}Volume", volume);
         }
