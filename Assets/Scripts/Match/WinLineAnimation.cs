@@ -29,12 +29,17 @@ public class WinLineAnimation : MonoBehaviour
             return;
         }
 
+        var (dimension, _, wintype) = board.GetWinInfo();
+        if (wintype == Board.WinType.None)
+        {
+            return;
+        }
+
         winLine.transform.localRotation = Quaternion.identity;
         winLine.gameObject.SetActive(true);
         winLine.color = new Color(0, 0, 0, 0);
         winLine.DOColor(Color.black, 1.0f);
 
-        var (dimension, _, wintype) = board.GetWinInfo();
 
         if (wintype == Board.WinType.Horizontal)
         {
