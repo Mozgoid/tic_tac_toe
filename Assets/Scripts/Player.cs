@@ -30,12 +30,14 @@ public class AIPlayer : Player
         Hard,
     }
 
+    public CoroutineRunner coroutineRunner;
     public Difficulty difficulty = Difficulty.Easy;
     private Match match;
-    public AIPlayer(Board.Symbol symbol, Match match, Difficulty difficulty, string name) : base(symbol, name)
+    public AIPlayer(Board.Symbol symbol, Match match, Difficulty difficulty, string name, CoroutineRunner coroutineRunner) : base(symbol, name)
     {
         this.match = match;
         this.difficulty = difficulty;
+        this.coroutineRunner = coroutineRunner;
         match.OnPlayerSwitch += OnPlayerSwitch;
     }
 
@@ -43,20 +45,27 @@ public class AIPlayer : Player
     {
         if (player == this)
         {
-            switch (difficulty)
-            {
-                case Difficulty.Easy:
-                    match.MakeMove(this, Hint.RandomHint(match.Board));
-                    break;
-                case Difficulty.Medium:
-                    match.MakeMove(this, Hint.MediumHint(match.Board));
-                    break;
-                case Difficulty.Hard:
-                    match.MakeMove(this, Hint.SmartHint(match.Board, Symbol));
-                    break;
-                default:
-                    throw new System.NotImplementedException();
-            }
+            coroutineRunner.StartCoroutine(MakeMoveCoroutine());
+        }
+    }
+
+    IEnumerator MakeMoveCoroutine()
+    {
+        yield return new WaitForSeconds(1f);
+
+        switch (difficulty)
+        {
+            case Difficulty.Easy:
+                match.MakeMove(this, Hint.RandomHint(match.Board));
+                break;
+            case Difficulty.Medium:
+                match.MakeMove(this, Hint.MediumHint(match.Board));
+                break;
+            case Difficulty.Hard:
+                match.MakeMove(this, Hint.SmartHint(match.Board, Symbol));
+                break;
+            default:
+                throw new System.NotImplementedException();
         }
     }
 }

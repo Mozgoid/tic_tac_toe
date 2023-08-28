@@ -5,6 +5,7 @@ public class MatchInstaller : MonoInstaller
 {
     [SerializeField] private BoardView boardView;
     [SerializeField] private Timer timer;
+    [SerializeField] private CoroutineRunner coroutineRunner;
 
     public override void InstallBindings()
     {
@@ -12,5 +13,6 @@ public class MatchInstaller : MonoInstaller
         Container.Bind<Match>().AsSingle().NonLazy();
         Container.Bind<BoardView>().FromInstance(boardView).AsSingle();
         Container.Bind<Timer>().FromInstance(timer).AsSingle();
+        Container.Bind<CoroutineRunner>().FromInstance(coroutineRunner).AsSingle();
     }
 }

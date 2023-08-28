@@ -14,12 +14,14 @@ public class Match
     public Board Board { get; private set; }
     public MatchSettings Settings { get; private set; }
     public Timer Timer { get; private set; }
+    public CoroutineRunner CoroutineRunner { get; private set; }
 
-    public Match(Board board, MatchSettings settings, Timer timer)
+    public Match(Board board, MatchSettings settings, Timer timer, CoroutineRunner coroutineRunner)
     {
         Board = board;
         Settings = settings;
         Timer = timer;
+        CoroutineRunner = coroutineRunner;
         Timer.OnNoMoreTime += OnNoMoreTime;
     }
 
@@ -36,15 +38,15 @@ public class Match
         {
             case MatchSettings.GameMode.SinglePlayerVsAI:
                 player1 = new LocalPlayer(firstPlayerSymbol, "Player 1");
-                player2 = new AIPlayer(secondPlayerSymbol, this, Settings.Difficulty, "Bot 1");
+                player2 = new AIPlayer(secondPlayerSymbol, this, Settings.Difficulty, "Bot 1", CoroutineRunner);
                 break;
             case MatchSettings.GameMode.LocalMultiPlayer:
                 player1 = new LocalPlayer(firstPlayerSymbol, "Player 1");
                 player2 = new LocalPlayer(secondPlayerSymbol, "Player 2");
                 break;
             case MatchSettings.GameMode.AIvsAI:
-                player1 = new AIPlayer(firstPlayerSymbol, this, Settings.Difficulty, "Bot 1");
-                player2 = new AIPlayer(secondPlayerSymbol, this, Settings.Difficulty, "Bot 2");
+                player1 = new AIPlayer(firstPlayerSymbol, this, Settings.Difficulty, "Bot 1", CoroutineRunner);
+                player2 = new AIPlayer(secondPlayerSymbol, this, Settings.Difficulty, "Bot 2", CoroutineRunner);
                 break;
             default:
                 throw new System.ArgumentException("Invalid game mode");
