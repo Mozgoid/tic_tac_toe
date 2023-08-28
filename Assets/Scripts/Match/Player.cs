@@ -30,6 +30,7 @@ public class AIPlayer : Player
         Hard,
     }
 
+    private const float MoveDelay = 0.9f;
     public CoroutineRunner coroutineRunner;
     public Difficulty difficulty = Difficulty.Easy;
     private Match match;
@@ -51,7 +52,7 @@ public class AIPlayer : Player
 
     IEnumerator MakeMoveCoroutine()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(MoveDelay);
 
         switch (difficulty)
         {
@@ -70,6 +71,8 @@ public class AIPlayer : Player
     }
 }
 
+// TODO: Implement this class
+// Should wait for a remote move and then call match.MakeMove
 public class RemotePlayer : Player
 {
     public RemotePlayer(Board.Symbol symbol, string name) : base(symbol, name)

@@ -1,18 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &5692772288252657454
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4864902160132737394}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2df95794baac134eb0bfc88aec724d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneName: Match
 --- !u!1 &7755564493221780111
 GameObject:
   m_ObjectHideFlags: 0
@@ -234,18 +221,23 @@ PrefabInstance:
     - target: {fileID: 7760312680658073013, guid: 0e5738c5b41d17941b96b531c8d7470b,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7760312680658073013, guid: 0e5738c5b41d17941b96b531c8d7470b,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7760312680658073013, guid: 0e5738c5b41d17941b96b531c8d7470b,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7760312680658073013, guid: 0e5738c5b41d17941b96b531c8d7470b,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 5692772288252657454}
+      objectReference: {fileID: 7755564493221780111}
     - target: {fileID: 7760312680658073013, guid: 0e5738c5b41d17941b96b531c8d7470b,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
@@ -253,8 +245,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7760312680658073013, guid: 0e5738c5b41d17941b96b531c8d7470b,
         type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7760312680658073013, guid: 0e5738c5b41d17941b96b531c8d7470b,
+        type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ChangeScene
+      value: SetActive
       objectReference: {fileID: 0}
     - target: {fileID: 7760312680658073013, guid: 0e5738c5b41d17941b96b531c8d7470b,
         type: 3}
@@ -268,12 +265,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0e5738c5b41d17941b96b531c8d7470b, type: 3}
---- !u!1 &4864902160132737394 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7247950262544830625, guid: 0e5738c5b41d17941b96b531c8d7470b,
-    type: 3}
-  m_PrefabInstance: {fileID: 2816578124166273491}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &165510890874215073 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2691601882649265010, guid: 0e5738c5b41d17941b96b531c8d7470b,
