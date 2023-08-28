@@ -24,6 +24,12 @@ public class HintButton : MonoBehaviour
             return;
         }
 
+        if (!(match.CurrentPlayer is LocalPlayer))
+        {
+            Debug.Log("Wait for you turn");
+            return;
+        }
+
         var hint = Hint.SmartHint(board, match.CurrentPlayer.Symbol);
         Debug.Log($"{match.CurrentPlayer.Name} should play {hint.x}, {hint.y}");
 

@@ -433,6 +433,7 @@ MonoBehaviour:
   x: {fileID: 1187474584}
   o: {fileID: 1590731281}
   back: {fileID: 5790035897276188676}
+  hint: {fileID: 4571481299375881503}
   animator: {fileID: 253426602702895892}
 --- !u!95 &253426602702895892
 Animator:

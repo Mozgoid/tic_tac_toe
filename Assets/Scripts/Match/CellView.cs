@@ -1,4 +1,5 @@
 ﻿using System;
+using DG.Tweening;
 using UnityEngine;
 
 public class CellView : MonoBehaviour
@@ -6,6 +7,8 @@ public class CellView : MonoBehaviour
     [SerializeField] private SpriteRenderer x;
     [SerializeField] private SpriteRenderer o;
     [SerializeField] private SpriteRenderer back;
+    
+    [SerializeField] private SpriteRenderer hint;
 
     [SerializeField] private Animator animator;
 
@@ -33,11 +36,13 @@ public class CellView : MonoBehaviour
 
     public void OnWin()
     {
-        animator.SetTrigger("Win");
+        var symbolsParent = x.transform.parent;
+        symbolsParent.DOScale(1.2f, 0.5f).SetEase(Ease.OutBounce);
+        
     }
 
     public void OnHint()
     {
-        animator.SetTrigger("Hint");
+        hint.DOColor(Color.white, 0.5f).SetEase(Ease.OutBounce).SetLoops(2, LoopType.Yoyo);
     }
 }
