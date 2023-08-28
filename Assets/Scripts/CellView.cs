@@ -27,7 +27,6 @@ public class CellView : MonoBehaviour
 
     private void OnMouseDown()
     {
-        Debug.Log($"Cell Clicked {Position}");
         OnClick?.Invoke(Position);
     }
 }

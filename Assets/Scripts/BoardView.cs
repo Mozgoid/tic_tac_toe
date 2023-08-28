@@ -23,6 +23,7 @@ public class BoardView : MonoBehaviour
         board.OnSymbolChange += OnSymbolChange;
         customization.OnCustomizationChanged += OnCustomizationChanged;
         SyncBoard();
+        match.StartMatch();
     }
 
     private void OnCustomizationChanged(Customization customization)

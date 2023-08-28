@@ -12,14 +12,52 @@ using UnityEngine;
 public class Match
 {
     public Board Board { get; private set; }
+    public MatchSettings Settings { get; private set; }
 
-    public Match(Board board)
+    public Match(Board board, MatchSettings settings)
     {
         Board = board;
+        Settings = settings;
+    }
+
+    public void StartMatch()
+    {
+        var firstPlayerSymbol = Settings.FirstPlayerSymbol;
+        if (firstPlayerSymbol == Board.Symbol.None)
+            firstPlayerSymbol = UnityEngine.Random.value < 0.5f ? Board.Symbol.X : Board.Symbol.O;
+        var secondPlayerSymbol = firstPlayerSymbol == Board.Symbol.X ? Board.Symbol.O : Board.Symbol.X;
+
+        Player player1, player2;
+
+        switch (Settings.Mode)
+        {
+            case MatchSettings.GameMode.SinglePlayerVsAI:
+                player1 = new LocalPlayer(firstPlayerSymbol, "Player 1");
+                player2 = new AIPlayer(secondPlayerSymbol, this, Settings.Difficulty, "Bot 1");
+                break;
+            case MatchSettings.GameMode.LocalMultiPlayer:
+                player1 = new LocalPlayer(firstPlayerSymbol, "Player 1");
+                player2 = new LocalPlayer(secondPlayerSymbol, "Player 2");
+                break;
+            case MatchSettings.GameMode.AIvsAI:
+                player1 = new AIPlayer(firstPlayerSymbol, this, Settings.Difficulty, "Bot 1");
+                player2 = new AIPlayer(secondPlayerSymbol, this, Settings.Difficulty, "Bot 2");
+                break;
+            default:
+                throw new System.ArgumentException("Invalid game mode");
+        }
+
+        if (firstPlayerSymbol == Board.Symbol.O)
+        {
+            var temp = player1;
+            player1 = player2;
+            player2 = temp;
+        }
+
         Players = new Player[]
         {
-            new LocalPlayer(Board.Symbol.X),
-            new AIPlayer(Board.Symbol.O, this, AIPlayer.Difficulty.Medium),
+            player1,
+            player2,
         };
         NextPlayer();
     }
@@ -54,6 +92,7 @@ public class Match
             throw new System.ArgumentException("Not your turn");
 
         Board.Set(player.Symbol, pos.x, pos.y);
+        Debug.Log($"{player.Name} set {player.Symbol} at {pos}");
 
         Winner = Board.WhoWins();
         if (Winner == null)

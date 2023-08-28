@@ -10,5 +10,6 @@ public class ProjectInstaller : MonoInstaller
     {
         Container.Bind<AudioManager>().FromInstance(audioManager).AsSingle();
         Container.Bind<Customization>().FromInstance(customization).AsSingle();
+        Container.Bind<MatchSettings>().AsSingle().NonLazy();
     }
 }

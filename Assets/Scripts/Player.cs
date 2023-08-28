@@ -7,16 +7,16 @@ public class Player
     public string Name { get; private set; }
     public Board.Symbol Symbol { get; private set; }
 
-    public Player(Board.Symbol symbol)
+    public Player(Board.Symbol symbol, string name)
     {
         Symbol = symbol;
-        Name = $"Player {symbol}";
+        Name = name;
     }
 }
 
 public class LocalPlayer : Player
 {
-    public LocalPlayer(Board.Symbol symbol) : base(symbol)
+    public LocalPlayer(Board.Symbol symbol, string name) : base(symbol, name)
     {
     }
 }
@@ -32,7 +32,7 @@ public class AIPlayer : Player
 
     public Difficulty difficulty = Difficulty.Easy;
     private Match match;
-    public AIPlayer(Board.Symbol symbol, Match match, Difficulty difficulty) : base(symbol)
+    public AIPlayer(Board.Symbol symbol, Match match, Difficulty difficulty, string name) : base(symbol, name)
     {
         this.match = match;
         this.difficulty = difficulty;
@@ -63,7 +63,7 @@ public class AIPlayer : Player
 
 public class RemotePlayer : Player
 {
-    public RemotePlayer(Board.Symbol symbol) : base(symbol)
+    public RemotePlayer(Board.Symbol symbol, string name) : base(symbol, name)
     {
     }
 }
