@@ -75,4 +75,9 @@ public class BoardView : MonoBehaviour
     {
         cells[pos.x, pos.y].SetSymbol(symbol);
     }
+
+    public CellView CellAt(Vector2Int pos)
+    {
+        return cells[pos.x, pos.y];
+    }
 }

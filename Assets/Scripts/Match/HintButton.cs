@@ -6,12 +6,14 @@ public class HintButton : MonoBehaviour
 {
     private Match match;
     private Board board;
+    private BoardView boardView;
 
     [Zenject.Inject]
-    public void Inject(Match match, Board board)
+    public void Inject(Match match, Board board, BoardView boardView)
     {
         this.match = match;
         this.board = board;
+        this.boardView = boardView;
     }
 
     public void OnClick()
@@ -24,5 +26,8 @@ public class HintButton : MonoBehaviour
 
         var hint = Hint.SmartHint(board, match.CurrentPlayer.Symbol);
         Debug.Log($"{match.CurrentPlayer.Name} should play {hint.x}, {hint.y}");
+
+        var cell = boardView.CellAt(hint);
+        cell.OnHint();
     }
 }

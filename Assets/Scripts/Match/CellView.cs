@@ -7,6 +7,8 @@ public class CellView : MonoBehaviour
     [SerializeField] private SpriteRenderer o;
     [SerializeField] private SpriteRenderer back;
 
+    [SerializeField] private Animator animator;
+
     public Vector2 Size => back.sprite.bounds.extents * 2;
 
     public Action<Vector2Int> OnClick;
@@ -21,12 +23,21 @@ public class CellView : MonoBehaviour
 
     public void SetSymbol(Board.Symbol symbol)
     {
-        x.gameObject.SetActive(symbol == Board.Symbol.X);
-        o.gameObject.SetActive(symbol == Board.Symbol.O);
+        animator.SetInteger("Symbol", (int)symbol);
     }
 
     private void OnMouseDown()
     {
         OnClick?.Invoke(Position);
+    }
+
+    public void OnWin()
+    {
+        animator.SetTrigger("Win");
+    }
+
+    public void OnHint()
+    {
+        animator.SetTrigger("Hint");
     }
 }
