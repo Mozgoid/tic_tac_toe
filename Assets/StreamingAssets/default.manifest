@@ -1,0 +1,21 @@
+ManifestFileVersion: 0
+CRC: 1618723951
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: fc96224731e08c0f46fec62dd1fc6b5b
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: c90fc19e2679e5295d10bd00f33cb4c3
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/Textures/Default/O.png
+- Assets/Textures/Default/cellBack.png
+- Assets/Textures/Default/X.png
+Dependencies: []
