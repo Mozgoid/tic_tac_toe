@@ -116,8 +116,9 @@ public class Match
     {
         currentPlayerIndex = (currentPlayerIndex + 1) % Players.Length;
         CurrentPlayer = Players[currentPlayerIndex];
-        OnPlayerSwitch?.Invoke(CurrentPlayer);
+        Debug.Log($"Next player is {CurrentPlayer.Name}");
         Timer.StartTurn(Settings.TurnTime);
+        OnPlayerSwitch?.Invoke(CurrentPlayer);
     }
 
     private void OnNoMoreTime()
@@ -138,6 +139,5 @@ public class Match
         Timer.StopTimer();
         Debug.Log($"Game over, winner is {winner}");
         OnGameOver?.Invoke(winner);
-
     }
 }

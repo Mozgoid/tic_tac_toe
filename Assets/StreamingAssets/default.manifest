@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1618723951
+CRC: 1385396923
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: fc96224731e08c0f46fec62dd1fc6b5b
+    Hash: 35758a21882568ded04cf9ab2a449a3b
   TypeTreeHash:
     serializedVersion: 2
     Hash: c90fc19e2679e5295d10bd00f33cb4c3
@@ -16,6 +16,6 @@ ClassTypes:
 SerializeReferenceClassIdentifiers: []
 Assets:
 - Assets/Textures/Default/O.png
-- Assets/Textures/Default/cellBack.png
+- Assets/Textures/Default/background.png
 - Assets/Textures/Default/X.png
 Dependencies: []
