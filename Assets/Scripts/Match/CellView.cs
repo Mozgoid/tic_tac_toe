@@ -34,13 +34,6 @@ public class CellView : MonoBehaviour
         OnClick?.Invoke(Position);
     }
 
-    public void OnWin()
-    {
-        var symbolsParent = x.transform.parent;
-        symbolsParent.DOScale(1.2f, 0.5f).SetEase(Ease.OutBounce);
-        
-    }
-
     public void OnHint()
     {
         hint.DOColor(Color.white, 0.5f).SetEase(Ease.OutBounce).SetLoops(2, LoopType.Yoyo);

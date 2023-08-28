@@ -104,25 +104,22 @@ public class Board
 
     public (int dimension, Symbol symbol, WinType wintype) GetWinInfo()
     {
-        // horizontal check
         for (int x = 0; x < Size; x++)
         {
             if (board[x, 0] != Symbol.None && board[x, 0] == board[x, 1] && board[x, 1] == board[x, 2])
             {
-                return (x , board[x, 0], WinType.Horizontal);
+                return (x , board[x, 0], WinType.Vertical);
             }
         }
 
-        // vertical check
         for (int y = 0; y < Size; y++)
         {
             if (board[0, y] != Symbol.None && board[0, y] == board[1, y] && board[1, y] == board[2, y])
             {
-                return (y , board[0, y], WinType.Vertical);
+                return (y , board[0, y], WinType.Horizontal);
             }
         }
 
-        // diagonal check
         if (board[0, 0] != Symbol.None)
         {
             for (int i = 1; i < Size; i++)
@@ -137,7 +134,6 @@ public class Board
             }
         }
 
-        // other diagonal check
         if (board[0, Size-1] != Symbol.None)
         {
             for (int i = 1; i < Size; i++)
