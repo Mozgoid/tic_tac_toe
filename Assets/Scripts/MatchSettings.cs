@@ -9,7 +9,7 @@ public class MatchSettings
     // None means assign randomly
     public Board.Symbol FirstPlayerSymbol = Board.Symbol.None;
 
-    public float RoundTime {get; set;} = 5f;
+    public float TurnTime {get; set;} = 5f;
 
     public enum GameMode
     {

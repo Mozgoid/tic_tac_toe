@@ -13,11 +13,14 @@ public class Match
 {
     public Board Board { get; private set; }
     public MatchSettings Settings { get; private set; }
+    public Timer Timer { get; private set; }
 
-    public Match(Board board, MatchSettings settings)
+    public Match(Board board, MatchSettings settings, Timer timer)
     {
         Board = board;
         Settings = settings;
+        Timer = timer;
+        Timer.OnNoMoreTime += OnNoMoreTime;
     }
 
     public void StartMatch()
@@ -69,6 +72,7 @@ public class Match
     // null if not decided yet, None if draw, otherwise the winner
     public Board.Symbol? Winner { get; private set; }
     public bool IsGameOver => Winner != null;
+    public Action<Board.Symbol> OnGameOver;
 
     public Action<Player> OnPlayerSwitch;
 
@@ -86,7 +90,10 @@ public class Match
     public void MakeMove(Player player, Vector2Int pos)
     {
         if (IsGameOver)
-            throw new System.ArgumentException("Game already finished");
+        {
+            Debug.Log("Game already finished");
+            return;
+        }
 
         if (player != CurrentPlayer)
             throw new System.ArgumentException("Not your turn");
@@ -94,18 +101,14 @@ public class Match
         Board.Set(player.Symbol, pos.x, pos.y);
         Debug.Log($"{player.Name} set {player.Symbol} at {pos}");
 
-        Winner = Board.WhoWins();
-        if (Winner == null)
+        var winner = Board.WhoWins();
+        if (winner == null)
         {
             NextPlayer();
         }
-        else if (Winner == Board.Symbol.None)
-        {
-            Debug.Log("Draw!");
-        }
         else
         {
-            Debug.Log($"{player.Name} wins!");
+            GameOver(winner.Value);
         }
     }
 
@@ -114,5 +117,27 @@ public class Match
         currentPlayerIndex = (currentPlayerIndex + 1) % Players.Length;
         CurrentPlayer = Players[currentPlayerIndex];
         OnPlayerSwitch?.Invoke(CurrentPlayer);
+        Timer.StartTurn(Settings.TurnTime);
+    }
+
+    private void OnNoMoreTime()
+    {
+        if (IsGameOver)
+        {
+            Debug.Log("Game already finished");
+            return;
+        }
+
+        Debug.Log($"{CurrentPlayer.Name} ran out of time");
+        GameOver(CurrentPlayer.Symbol == Board.Symbol.X ? Board.Symbol.O : Board.Symbol.X);
+    }
+
+    private void GameOver(Board.Symbol winner)
+    {
+        Winner = winner;
+        Timer.StopTimer();
+        Debug.Log($"Game over, winner is {winner}");
+        OnGameOver?.Invoke(winner);
+
     }
 }
