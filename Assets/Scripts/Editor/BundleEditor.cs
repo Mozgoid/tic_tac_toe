@@ -5,7 +5,6 @@ public class BundleEditor : EditorWindow
 {
     string bundleName = "";
     private Sprite X, O, Background;
-    private BuildTarget buildTarget = BuildTarget.StandaloneWindows;
 
     
     [MenuItem("Tools/BundleEditor")]
@@ -21,7 +20,6 @@ public class BundleEditor : EditorWindow
         X = (Sprite)EditorGUILayout.ObjectField("X", X, typeof(Sprite), false);
         O = (Sprite)EditorGUILayout.ObjectField("O", O, typeof(Sprite), false);
         Background = (Sprite)EditorGUILayout.ObjectField("Background", Background, typeof(Sprite), false);
-        buildTarget = (BuildTarget)EditorGUILayout.EnumPopup("Build Target", buildTarget);
 
         if (GUILayout.Button("Create Bundle"))
         {
@@ -45,12 +43,23 @@ public class BundleEditor : EditorWindow
 
         var bundle = new AssetBundleBuild();
         bundle.assetBundleName = bundleName;
+
         bundle.assetNames = new string[]
         {
             AssetDatabase.GetAssetPath(X),
             AssetDatabase.GetAssetPath(O),
-            AssetDatabase.GetAssetPath(Background),
+            AssetDatabase.GetAssetPath(Background)
         };
-        BuildPipeline.BuildAssetBundles("Assets/StreamingAssets/", new AssetBundleBuild[] {bundle}, BuildAssetBundleOptions.None, BuildTarget.StandaloneWindows);
+
+        bundle.addressableNames = new string[]
+        {
+            "X",
+            "O",
+            "Background"
+        };
+
+        BuildPipeline.BuildAssetBundles("Assets/StreamingAssets/", 
+            new AssetBundleBuild[] {bundle}, BuildAssetBundleOptions.None, EditorUserBuildSettings.activeBuildTarget);
+
     }
 }
