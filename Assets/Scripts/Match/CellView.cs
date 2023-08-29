@@ -2,6 +2,12 @@
 using DG.Tweening;
 using UnityEngine;
 
+
+/// <summary>
+/// View for cell.
+/// Reacts to clicks, and notifies about them.
+/// Changes appearance according to customization and state
+/// </summary>
 public class CellView : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer x;

@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Class that helps see what we have loaded from bundle
+/// </summary>
 public class CurrentCustomizationPreview : MonoBehaviour
 {
     [SerializeField] private Image X, O, Background;

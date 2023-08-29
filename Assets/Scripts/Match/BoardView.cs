@@ -1,5 +1,9 @@
 ﻿using UnityEngine;
 
+
+/// <summary>
+/// Syncs Board model and how it looks.
+/// </summary>
 public class BoardView : MonoBehaviour
 {
     [SerializeField] private CellView cellPrefab;

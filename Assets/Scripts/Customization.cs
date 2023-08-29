@@ -5,6 +5,10 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 
+
+/// <summary>
+/// Loads asset bundles for changing how certain game elements look
+/// </summary>
 public class Customization : MonoBehaviour
 {
     public Sprite X {get; private set;}

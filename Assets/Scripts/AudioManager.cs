@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 
+/// <summary>
+/// Controls sound settings
+/// </summary>
 public class AudioManager : MonoBehaviour
 {
     private static float minVolume = -80;

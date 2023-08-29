@@ -1,6 +1,11 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Several static methods that analyze board and return a hint for next move.
+/// Some methods are better than others.
+/// Can be used in other places, for example for AI to make decisions, or on hint button.
+/// </summary>
 public static class Hint
 {
     private static List<Vector2Int> emptyPositionsCache;

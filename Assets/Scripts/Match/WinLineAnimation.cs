@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
+
+/// <summary>
+/// shows line that crosses winning symbols at the end of the game
+/// </summary>
 public class WinLineAnimation : MonoBehaviour
 {
     [Zenject.Inject] private Match match;

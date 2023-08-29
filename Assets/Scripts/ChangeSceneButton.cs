@@ -2,6 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+/// <summary>
+/// Simple class to change scene.
+/// Also Restart button use it to make random player order on restart
+/// </summary>
 public class ChangeSceneButton : MonoBehaviour
 {
     [SerializeField] private string sceneName;

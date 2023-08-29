@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+/// <summary>
+/// Class tracks move history and helps undo them
+/// </summary>
 public class History
 {
     private Board board;
