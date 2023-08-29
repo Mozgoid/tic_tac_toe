@@ -660,24 +660,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!1 &893977228 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7550715449181336397, guid: fdfca447c2f9a1b44a6b72f58a42d868,
-    type: 3}
-  m_PrefabInstance: {fileID: 1531077731167655904}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &893977233
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 893977228}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c65d0140dcb5bd49a28b20804efd63b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &964926894
 GameObject:
   m_ObjectHideFlags: 0
@@ -1393,36 +1375,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7489003128511764057, guid: fdfca447c2f9a1b44a6b72f58a42d868,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7489003128511764057, guid: fdfca447c2f9a1b44a6b72f58a42d868,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7489003128511764057, guid: fdfca447c2f9a1b44a6b72f58a42d868,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 893977233}
-    - target: {fileID: 7489003128511764057, guid: fdfca447c2f9a1b44a6b72f58a42d868,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7489003128511764057, guid: fdfca447c2f9a1b44a6b72f58a42d868,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Undo
-      objectReference: {fileID: 0}
-    - target: {fileID: 7489003128511764057, guid: fdfca447c2f9a1b44a6b72f58a42d868,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 9119033132963980936, guid: fdfca447c2f9a1b44a6b72f58a42d868,
         type: 3}

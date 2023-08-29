@@ -11,6 +11,7 @@ public class MatchInstaller : MonoInstaller
     {
         Container.Bind<Board>().AsSingle().NonLazy();
         Container.Bind<Match>().AsSingle().NonLazy();
+        Container.Bind<History>().AsSingle().NonLazy();
         Container.Bind<BoardView>().FromInstance(boardView).AsSingle();
         Container.Bind<Timer>().FromInstance(timer).AsSingle();
         Container.Bind<CoroutineRunner>().FromInstance(coroutineRunner).AsSingle();
