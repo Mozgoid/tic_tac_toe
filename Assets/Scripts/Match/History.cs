@@ -6,8 +6,7 @@ public class History
 {
     private Board board;
 
-    [Zenject.Inject]
-    public void Inject(Board board)
+    public History(Board board)
     {
         this.board = board;
         board.OnSymbolChange += OnSymbolChange;
