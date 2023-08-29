@@ -1212,7 +1212,7 @@ PrefabInstance:
     - target: {fileID: 7760312680658073013, guid: 0e5738c5b41d17941b96b531c8d7470b,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ChangeScene
+      value: SetRandomSymbolsAndChangeScene
       objectReference: {fileID: 0}
     - target: {fileID: 7760312680658073013, guid: 0e5738c5b41d17941b96b531c8d7470b,
         type: 3}
@@ -1222,7 +1222,7 @@ PrefabInstance:
     - target: {fileID: 7810587283521443342, guid: 0e5738c5b41d17941b96b531c8d7470b,
         type: 3}
       propertyPath: m_text
-      value: restart
+      value: Restart
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0e5738c5b41d17941b96b531c8d7470b, type: 3}

@@ -33,7 +33,14 @@ public class StatusText : MonoBehaviour
         }
         else
         {
-            statusText.text = $"{winner} wins";
+            foreach (var player in match.Players)
+            {
+                if (player.Symbol == winner)
+                {
+                    statusText.text = $"{player.Name} wins";
+                    return;
+                }
+            }
         }
     }
 
